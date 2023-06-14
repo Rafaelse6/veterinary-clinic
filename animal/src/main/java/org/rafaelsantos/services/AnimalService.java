@@ -8,7 +8,6 @@ import org.rafaelsantos.repositories.AnimalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class AnimalService {
@@ -17,27 +16,26 @@ public class AnimalService {
     private AnimalRepository animalRepository;
 
     public List<AnimalDTO> findAllAnimals(){
-      List<AnimalDTO> animals = new ArrayList<>();
+        List<AnimalDTO> animals = new ArrayList<>();
 
-      animalRepository.findAll().stream().forEach(x -> {
-          animals.add(mapAnimalToDTO(x));
-      });
+        animalRepository.findAll().stream().forEach(item ->{
+            animals.add(mapAnimalEntityToDTO(item));
+        });
 
-      return animals;
+        return animals;
     }
 
-    public void findAnimalById(Long id){
-        animalRepository.findById(id);
+    public AnimalDTO findAnimalById(Long id){
+        return mapAnimalEntityToDTO(animalRepository.findById(id));
     }
 
     public void createNewAnimal(AnimalDTO animalDTO){
         animalRepository.persist(mapAnimalDtoToEntity(animalDTO));
     }
 
-    public void changeAnimal(Long id, AnimalDTO animalDTO){
+    public void updateAnimal(Long id, AnimalDTO animalDTO){
         Animal animal = animalRepository.findById(id);
 
-        animal.setId(animalDTO.getId());
         animal.setName(animalDTO.getName());
         animal.setAge(animalDTO.getAge());
         animal.setGender(animalDTO.getGender());
@@ -49,26 +47,23 @@ public class AnimalService {
         animalRepository.deleteById(id);
     }
 
-    private AnimalDTO mapAnimalToDTO(Animal animal) {
+    private AnimalDTO mapAnimalEntityToDTO(Animal animal){
         AnimalDTO animalDTO = new AnimalDTO();
 
-        animalDTO.setId(animal.getId());
-        animalDTO.setName(animal.getName());
         animalDTO.setAge(animal.getAge());
-        animalDTO.setGender(animalDTO.getGender());
+        animalDTO.setName(animal.getName());
+        animalDTO.setGender(animal.getGender());
 
         return animalDTO;
     }
 
-    private Animal mapAnimalDtoToEntity(AnimalDTO animalEntity){
-        Animal animal = new Animal();
+    private Animal mapAnimalDtoToEntity(AnimalDTO animal){
+        Animal animalEntity = new Animal();
 
-        animal.setId(animal.getId());
-        animal.setName(animal.getName());
-        animal.setAge(animal.getAge());
-        animal.setGender(animal.getGender());
+        animalEntity.setAge(animal.getAge());
+        animalEntity.setName(animal.getName());
+        animalEntity.setGender(animal.getGender());
 
-        return animal;
+        return animalEntity;
     }
-
 }
