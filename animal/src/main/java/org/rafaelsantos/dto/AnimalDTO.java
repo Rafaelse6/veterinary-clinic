@@ -11,7 +11,6 @@ import lombok.extern.jackson.Jacksonized;
 @NoArgsConstructor
 public class AnimalDTO {
 
-    private Long id;
     private String name;
 
     private String gender;
