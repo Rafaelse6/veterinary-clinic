@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class TreatmentDTO {
 
     private Long customerId;
-    private Long customerName;
+    private String customerName;
     private Long animalId;
     private BigDecimal treatmentValue;
 }

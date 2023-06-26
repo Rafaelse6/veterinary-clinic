@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="treatment")
+@Table(name = "treatment")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,12 +21,11 @@ public class Treatment {
     @GeneratedValue
     private Long treatmentId;
 
-    private String customerId;
+    private Long customerId;
 
     private Long animalId;
 
     private String customerName;
-
 
     private BigDecimal treatmentValue;
 }

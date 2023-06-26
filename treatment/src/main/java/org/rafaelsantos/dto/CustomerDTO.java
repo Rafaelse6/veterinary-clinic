@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
