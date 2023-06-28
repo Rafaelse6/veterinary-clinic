@@ -12,7 +12,6 @@ import lombok.extern.jackson.Jacksonized;
 public class AnimalDTO {
 
     private String name;
-
     private String gender;
     private Integer age;
 }

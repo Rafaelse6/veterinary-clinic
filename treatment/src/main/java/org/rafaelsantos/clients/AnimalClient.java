@@ -14,5 +14,5 @@ public interface AnimalClient {
 
     @GET
     @Path("/{id}")
-    AnimalDTO getAnimalById(@PathParam("id") Long id);
+    AnimalDTO getAnimalById(@PathParam("id")Long id);
 }

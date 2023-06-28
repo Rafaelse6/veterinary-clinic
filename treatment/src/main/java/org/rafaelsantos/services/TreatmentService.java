@@ -3,6 +3,7 @@ package org.rafaelsantos.services;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.rafaelsantos.clients.AnimalClient;
 import org.rafaelsantos.clients.CustomerClient;
@@ -41,8 +42,9 @@ public class TreatmentService {
     public void saveNewTreatment(TreatmentDTO treatmentDTO){
         CustomerDTO customerDTO = customerClient.getCustomerById(treatmentDTO.getCustomerId());
 
-        if(customerDTO.getName().equals(treatmentDTO.getCustomerName()) && animalClient.getAnimalById(treatmentDTO.getCustomerId()) != null){
-            treatmentRepository.persist(mapDtoToEntity(treatmentDTO));
+        if(customerDTO.getName().equals(treatmentDTO.getCustomerName())
+                && animalClient.getAnimalById(treatmentDTO.getAnimalId()) != null){
+           treatmentRepository.persist(mapDtoToEntity(treatmentDTO));
         } else {
             throw new NotFoundException();
         }
@@ -64,10 +66,10 @@ public class TreatmentService {
     private Treatment mapDtoToEntity(TreatmentDTO item){
         Treatment treatment = new Treatment();
 
-        treatment.setCustomerId(item.getCustomerId());
-        treatment.setCustomerName(item.getCustomerName());
-        treatment.setAnimalId(item.getCustomerId());
-        treatment.setTreatmentValue(item.getTreatmentValue());
+       treatment.setCustomerId(item.getCustomerId());
+       treatment.setCustomerName(item.getCustomerName());
+       treatment.setAnimalId(item.getAnimalId());
+       treatment.setTreatmentValue(item.getTreatmentValue());
 
         return treatment;
     }

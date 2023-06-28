@@ -14,14 +14,13 @@ import org.rafaelsantos.services.TreatmentService;
 
 import java.util.List;
 
-@Path("/api/orders")
+@Path("/api/treatments")
 public class TreatmentController {
 
     @Inject
     private TreatmentService treatmentService;
 
     @GET
-    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     public List<TreatmentDTO> getAllTreatments(){
         return treatmentService.getAllTreatments();
@@ -29,9 +28,9 @@ public class TreatmentController {
 
     @POST
     @Transactional
-    public Response saveNewTreatment(TreatmentDTO treatmentDTO){
+    public Response saveNewTreatment(TreatmentDTO treatment){
         try {
-            treatmentService.saveNewTreatment(treatmentDTO);
+            treatmentService.saveNewTreatment(treatment);
             return Response.ok().build();
         } catch (Exception e){
             e.printStackTrace();
